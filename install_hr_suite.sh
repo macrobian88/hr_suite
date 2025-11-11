@@ -8,29 +8,15 @@ echo ""
 # Get site name
 read -p "Enter your site name (e.g., mysite.local): " SITE_NAME
 
-if [ -z "$SITE_NAME" ]; then
-    echo "Error: Site name cannot be empty"
-    exit 1
-fi
-
 echo ""
 echo "Installing HR Suite on $SITE_NAME..."
 echo ""
-
-# Check if site exists
-if ! bench --site $SITE_NAME list-apps &> /dev/null; then
-    echo "Error: Site $SITE_NAME not found"
-    exit 1
-fi
 
 # Install ERPNext if not installed
 if ! bench --site $SITE_NAME list-apps | grep -q "erpnext"; then
     echo "ERPNext not found. Installing ERPNext..."
     bench get-app erpnext --branch version-14
     bench --site $SITE_NAME install-app erpnext
-    echo "✅ ERPNext installed"
-else
-    echo "✅ ERPNext already installed"
 fi
 
 # Install HRMS if not installed
@@ -38,9 +24,6 @@ if ! bench --site $SITE_NAME list-apps | grep -q "hrms"; then
     echo "HRMS not found. Installing HRMS..."
     bench get-app hrms --branch version-14
     bench --site $SITE_NAME install-app hrms
-    echo "✅ HRMS installed"
-else
-    echo "✅ HRMS already installed"
 fi
 
 # Get HR Suite
@@ -59,10 +42,6 @@ bench --site $SITE_NAME migrate
 echo "Building assets..."
 bench build --app hr_suite
 
-# Clear cache
-echo "Clearing cache..."
-bench --site $SITE_NAME clear-cache
-
 # Restart
 echo "Restarting services..."
 bench restart
@@ -77,5 +56,10 @@ echo "1. Login to your site: http://$SITE_NAME"
 echo "2. Navigate to HR Suite Dashboard"
 echo "3. Start managing your HR operations!"
 echo ""
-echo "Documentation: https://github.com/macrobian88/hr_suite"
+echo "Default Roles Created:"
+echo "  - HR Manager Suite"
+echo "  - HR User Suite"
+echo "  - Employee Self Service"
+echo ""
+echo "Employee Portal: http://$SITE_NAME/hr-portal"
 echo ""
