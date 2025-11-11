@@ -1,12 +1,63 @@
-*.pyc
-*.egg-info
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
 *.swp
 *.swo
-tags
-hr_suite/docs/current
-dist/
-build/
-__pycache__/
-*.DS_Store
+*~
+
+# Frappe
+*.pyc
+*.log
+*.swp
+.DS_Store
 node_modules/
+public/
+sites/*/site_config.json
+sites/*/site_config_dev.json
+sites/*/logs/
+sites/*/locks/
+sites/assets/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Backup files
+*.bak
+*.backup
+
+# Compiled files
 *.compiled

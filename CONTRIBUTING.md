@@ -1,208 +1,137 @@
 # Contributing to HR Suite
 
-Thank you for considering contributing to HR Suite! We welcome contributions from the community.
+First off, thank you for considering contributing to HR Suite! It's people like you that make HR Suite such a great tool.
 
-## How to Contribute
+## Code of Conduct
+
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
+
+## How Can I Contribute?
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/macrobian88/hr_suite/issues)
-2. If not, create a new issue using the bug report template
-3. Provide as much detail as possible:
-   - Steps to reproduce
-   - Expected behavior
-   - Actual behavior
-   - Environment details
-   - Screenshots if applicable
+Before creating bug reports, please check the issue list as you might find out that you don't need to create one. When you are creating a bug report, please include as many details as possible:
 
-### Suggesting Features
+* **Use a clear and descriptive title**
+* **Describe the exact steps to reproduce the problem**
+* **Provide specific examples**
+* **Describe the behavior you observed**
+* **Explain which behavior you expected to see instead**
+* **Include screenshots if possible**
 
-1. Check if the feature has already been requested
-2. Create a new issue using the feature request template
-3. Explain:
-   - What problem does it solve?
-   - How should it work?
-   - Any alternative solutions you've considered
+### Suggesting Enhancements
 
-### Code Contributions
+Enhancement suggestions are tracked as GitHub issues. When creating an enhancement suggestion, please include:
 
-#### Setting Up Development Environment
+* **Use a clear and descriptive title**
+* **Provide a step-by-step description of the suggested enhancement**
+* **Provide specific examples to demonstrate the steps**
+* **Describe the current behavior and explain the behavior you expected**
+* **Explain why this enhancement would be useful**
+
+### Pull Requests
+
+1. Fork the repo and create your branch from `main`
+2. If you've added code that should be tested, add tests
+3. Ensure the test suite passes
+4. Make sure your code lints
+5. Issue that pull request!
+
+## Development Setup
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/hr_suite.git
+git clone https://github.com/YOUR-USERNAME/hr_suite.git
 cd hr_suite
 
-# Add upstream remote
-git remote add upstream https://github.com/macrobian88/hr_suite.git
+# Install dependencies
+pip install -e .
 
-# Create a new branch
-git checkout -b feature/your-feature-name
+# Install to a test site
+bench --site test.local install-app hr_suite
 ```
 
-#### Development Workflow
+## Coding Style
 
-1. **Make your changes**
-   - Follow Frappe coding standards
-   - Write clean, readable code
-   - Add comments where necessary
+* Follow PEP 8 for Python code
+* Use meaningful variable and function names
+* Add comments for complex logic
+* Write docstrings for all functions and classes
 
-2. **Test your changes**
-   ```bash
-   # Install in a test site
-   bench --site test-site install-app hr_suite
-   
-   # Test thoroughly
-   # - Manual testing
-   # - Check for errors in console
-   # - Verify all features work
-   ```
-
-3. **Commit your changes**
-   ```bash
-   git add .
-   git commit -m "feat: add amazing new feature"
-   ```
-
-   Use conventional commit messages:
-   - `feat:` - New feature
-   - `fix:` - Bug fix
-   - `docs:` - Documentation changes
-   - `style:` - Code style changes (formatting, etc.)
-   - `refactor:` - Code refactoring
-   - `test:` - Adding tests
-   - `chore:` - Maintenance tasks
-
-4. **Push to your fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-5. **Create a Pull Request**
-   - Go to the original repository
-   - Click "New Pull Request"
-   - Select your branch
-   - Fill in the PR template
-   - Wait for review
-
-#### Code Style Guidelines
-
-**Python:**
-- Follow PEP 8
-- Use descriptive variable names
-- Add docstrings to functions
-- Maximum line length: 100 characters
+### Python Style Guide
 
 ```python
-def send_welcome_email(employee):
+def function_name(param1, param2):
     """
-    Send welcome email to new employee
+    Brief description of what the function does.
     
     Args:
-        employee (Document): Employee document
+        param1: Description of param1
+        param2: Description of param2
+        
+    Returns:
+        Description of return value
     """
-    # Implementation
+    # Your code here
+    pass
 ```
 
-**JavaScript:**
-- Use ES6+ syntax
-- Use camelCase for variables
-- Add JSDoc comments
+### JavaScript Style Guide
 
 ```javascript
-/**
- * Get HR statistics
- * @returns {Object} HR stats object
- */
-function getHRStats() {
-    // Implementation
+function functionName(param1, param2) {
+    // Use camelCase for function names
+    // Add comments for complex logic
+    return result;
 }
 ```
 
-#### Documentation
+## Testing
 
-- Update README.md if you add new features
-- Add inline comments for complex logic
-- Update docstrings
-- Add examples where helpful
+Before submitting a pull request, make sure all tests pass:
 
-### Pull Request Process
+```bash
+bench --site test.local run-tests --app hr_suite
+```
 
-1. **Before submitting:**
-   - Test your changes thoroughly
-   - Update documentation
-   - Check for any console errors
-   - Ensure code follows style guidelines
+## Commit Messages
 
-2. **PR Description should include:**
-   - What changes were made
-   - Why the changes were made
-   - How to test the changes
-   - Screenshots (if UI changes)
-   - Related issue numbers
+* Use the present tense ("Add feature" not "Added feature")
+* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+* Limit the first line to 72 characters or less
+* Reference issues and pull requests liberally after the first line
 
-3. **After submitting:**
-   - Respond to review comments
-   - Make requested changes
-   - Keep the PR updated with main branch
+Example:
+```
+Add employee onboarding workflow
 
-### Testing
+- Implement automated email sending
+- Add welcome email template
+- Update documentation
 
-#### Manual Testing Checklist
+Fixes #123
+```
 
-- [ ] Installation works correctly
-- [ ] All default data is created
-- [ ] Employee creation triggers automation
-- [ ] Leave allocation works
-- [ ] Email templates function
-- [ ] Scheduled tasks run without errors
-- [ ] No console errors
-- [ ] All links work
-- [ ] Responsive design (if UI changes)
+## Documentation
 
-#### Testing in Different Scenarios
+When adding new features, please update the documentation:
 
-- Test with fresh installation
-- Test with existing ERPNext installation
-- Test with different Frappe/ERPNext versions
-- Test with different browsers
+* Update README.md if needed
+* Add docstrings to new functions
+* Update user documentation if applicable
 
-### Documentation Contributions
+## Additional Notes
 
-Documentation improvements are always welcome!
+### Issue and Pull Request Labels
 
-- Fix typos
-- Improve clarity
-- Add examples
-- Translate to other languages
-- Create tutorials
-- Record video guides
+* `bug` - Something isn't working
+* `enhancement` - New feature or request
+* `documentation` - Improvements or additions to documentation
+* `good first issue` - Good for newcomers
+* `help wanted` - Extra attention is needed
 
-### Community Guidelines
+## Questions?
 
-- Be respectful and inclusive
-- Help others when you can
-- Accept constructive criticism gracefully
-- Focus on what's best for the community
-- Follow the [Code of Conduct](CODE_OF_CONDUCT.md)
+Feel free to open an issue with your question or contact the maintainers.
 
-### Getting Help
-
-- **Questions:** Use [GitHub Discussions](https://github.com/macrobian88/hr_suite/discussions)
-- **Bugs:** Open an [Issue](https://github.com/macrobian88/hr_suite/issues)
-- **Chat:** Join our community chat (link TBD)
-
-## Recognition
-
-Contributors will be:
-- Listed in the CONTRIBUTORS.md file
-- Mentioned in release notes
-- Credited in the documentation
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the MIT License.
-
----
-
-Thank you for contributing to HR Suite! 🎉
+Thank you for contributing! 🚀
