@@ -1,0 +1,12 @@
+*.pyc
+*.egg-info
+*.swp
+*.swo
+tags
+hr_suite/docs/current
+dist/
+build/
+__pycache__/
+*.DS_Store
+node_modules/
+*.compiled
