@@ -8,10 +8,10 @@ app_email = "support@yourcompany.com"
 app_license = "MIT"
 app_version = "1.0.0"
 
-# Required apps - ERPNext and HRMS are mandatory
-# On Frappe Cloud: This will show a clear error message if ERPNext/HRMS are not in the bench
-# On Self-Hosted: The installation script will auto-install these if missing
-required_apps = ["erpnext", "hrms"]
+# Required apps - We check these during installation, not at bench level
+# This allows the app to be added to Frappe Cloud benches without ERPNext being present first
+# The actual dependency check happens in before_install()
+required_apps = []
 
 # Fixtures - Data that will be installed automatically
 fixtures = [
