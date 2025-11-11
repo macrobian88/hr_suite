@@ -1,3 +1,5 @@
+# HR Suite Requirements
+# ERPNext and HRMS are Frappe apps, not pip packages
+# They should be installed using 'bench get-app' and 'bench install-app'
+# No additional pip requirements needed
 frappe
-erpnext>=14.0.0
-hrms>=14.0.0
