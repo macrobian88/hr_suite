@@ -1,0 +1,1 @@
+hr_suite.patches.v1_0.setup_hr_suite
