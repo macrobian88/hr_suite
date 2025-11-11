@@ -8,10 +8,10 @@ app_email = "support@yourcompany.com"
 app_license = "MIT"
 app_version = "1.0.0"
 
-# Required apps - ERPNext includes HR module
-# Note: ERPNext and HRMS should be installed on your site for HR Suite to work properly
-# We don't enforce this at bench level to allow flexible installation order on Frappe Cloud
-required_apps = []
+# Required apps - ERPNext and HRMS are mandatory
+# On Frappe Cloud: This will show a clear error message if ERPNext/HRMS are not in the bench
+# On Self-Hosted: The installation script will auto-install these if missing
+required_apps = ["erpnext", "hrms"]
 
 # Fixtures - Data that will be installed automatically
 fixtures = [
@@ -24,6 +24,9 @@ fixtures = [
         "filters": [["name", "in", ["HR Manager Suite", "HR User Suite"]]]
     }
 ]
+
+# Before install hook - Check and install dependencies
+before_install = "hr_suite.install.before_install"
 
 # After install hook
 after_install = "hr_suite.install.after_install"

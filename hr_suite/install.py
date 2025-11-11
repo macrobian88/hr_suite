@@ -1,6 +1,163 @@
 import frappe
 from frappe import _
 from frappe.utils import today, add_days, add_months
+import subprocess
+import os
+
+def before_install():
+    """
+    Check and install required dependencies before HR Suite installation
+    """
+    frappe.msgprint(_("Checking dependencies..."), alert=True)
+    
+    # Check if we're on Frappe Cloud or self-hosted
+    is_cloud = is_frappe_cloud()
+    
+    if is_cloud:
+        # On Frappe Cloud, just verify - can't auto-install
+        verify_dependencies_cloud()
+    else:
+        # On self-hosted, auto-install if needed
+        install_dependencies_self_hosted()
+
+def is_frappe_cloud():
+    """
+    Detect if running on Frappe Cloud
+    """
+    # Check for Frappe Cloud environment indicators
+    site_config = frappe.get_site_config()
+    return site_config.get('is_frappe_cloud') or os.path.exists('/home/frappe/frappe-cloud')
+
+def verify_dependencies_cloud():
+    """
+    Verify dependencies on Frappe Cloud
+    Can't auto-install, but provide helpful messages
+    """
+    installed_apps = frappe.get_installed_apps()
+    missing_apps = []
+    
+    if "erpnext" not in installed_apps:
+        missing_apps.append("ERPNext")
+    
+    if "hrms" not in installed_apps:
+        missing_apps.append("HRMS")
+    
+    if missing_apps:
+        message = f"""
+        <h3>Missing Required Apps</h3>
+        <p>HR Suite requires the following apps to be installed on your site:</p>
+        <ul>
+            {''.join([f'<li>{app}</li>' for app in missing_apps])}
+        </ul>
+        <p><strong>On Frappe Cloud, please:</strong></p>
+        <ol>
+            <li>Go to your Site → Apps tab</li>
+            <li>Install {' and '.join(missing_apps)}</li>
+            <li>Then install HR Suite</li>
+        </ol>
+        """
+        frappe.throw(message, title="Dependencies Required")
+    
+    frappe.msgprint(_("All dependencies verified! ✅"), alert=True, indicator="green")
+
+def install_dependencies_self_hosted():
+    """
+    Auto-install ERPNext and HRMS on self-hosted installations
+    """
+    try:
+        installed_apps = frappe.get_installed_apps()
+        bench_path = frappe.utils.get_bench_path()
+        site_name = frappe.local.site
+        
+        # Check and install ERPNext
+        if "erpnext" not in installed_apps:
+            frappe.msgprint(_("ERPNext not found. Installing ERPNext..."), alert=True)
+            
+            # Check if ERPNext is in bench apps
+            bench_apps = get_bench_apps()
+            
+            if "erpnext" not in bench_apps:
+                # Get ERPNext app
+                frappe.msgprint(_("Downloading ERPNext..."), alert=True)
+                run_command(f"cd {bench_path} && bench get-app erpnext --branch version-15")
+            
+            # Install to site
+            frappe.msgprint(_("Installing ERPNext to site..."), alert=True)
+            run_command(f"cd {bench_path} && bench --site {site_name} install-app erpnext")
+            frappe.msgprint(_("ERPNext installed successfully! ✅"), alert=True, indicator="green")
+        else:
+            frappe.msgprint(_("ERPNext already installed ✅"), alert=True, indicator="green")
+        
+        # Check and install HRMS
+        if "hrms" not in installed_apps:
+            frappe.msgprint(_("HRMS not found. Installing HRMS..."), alert=True)
+            
+            # Check if HRMS is in bench apps
+            bench_apps = get_bench_apps()
+            
+            if "hrms" not in bench_apps:
+                # Get HRMS app
+                frappe.msgprint(_("Downloading HRMS..."), alert=True)
+                run_command(f"cd {bench_path} && bench get-app hrms --branch version-15")
+            
+            # Install to site
+            frappe.msgprint(_("Installing HRMS to site..."), alert=True)
+            run_command(f"cd {bench_path} && bench --site {site_name} install-app hrms")
+            frappe.msgprint(_("HRMS installed successfully! ✅"), alert=True, indicator="green")
+        else:
+            frappe.msgprint(_("HRMS already installed ✅"), alert=True, indicator="green")
+        
+        frappe.msgprint(_("All dependencies are ready! Proceeding with HR Suite installation..."), alert=True, indicator="green")
+        
+    except Exception as e:
+        frappe.log_error(f"Error installing dependencies: {str(e)}")
+        error_msg = f"""
+        <h3>Could not auto-install dependencies</h3>
+        <p>Please install manually:</p>
+        <pre>
+cd {bench_path}
+bench get-app erpnext --branch version-15
+bench get-app hrms --branch version-15
+bench --site {site_name} install-app erpnext
+bench --site {site_name} install-app hrms
+bench --site {site_name} install-app hr_suite
+        </pre>
+        <p><strong>Error:</strong> {str(e)}</p>
+        """
+        frappe.throw(error_msg, title="Manual Installation Required")
+
+def get_bench_apps():
+    """
+    Get list of apps available in the bench
+    """
+    try:
+        bench_path = frappe.utils.get_bench_path()
+        apps_txt_path = os.path.join(bench_path, "sites", "apps.txt")
+        
+        if os.path.exists(apps_txt_path):
+            with open(apps_txt_path, 'r') as f:
+                return [app.strip() for app in f.readlines()]
+        return []
+    except Exception as e:
+        frappe.log_error(f"Error getting bench apps: {str(e)}")
+        return []
+
+def run_command(command):
+    """
+    Run shell command
+    """
+    try:
+        result = subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        frappe.log_error(f"Command failed: {command}\nError: {e.stderr}")
+        raise Exception(f"Command failed: {e.stderr}")
 
 def after_install():
     """
@@ -8,55 +165,38 @@ def after_install():
     """
     frappe.msgprint(_("Setting up HR Suite..."), alert=True)
     
-    # Step 1: Install required apps
-    install_required_apps()
-    
-    # Step 2: Create default HR roles
+    # Step 1: Create default HR roles
     create_hr_roles()
     
-    # Step 3: Setup HR configurations
+    # Step 2: Setup HR configurations
     setup_hr_settings()
     
-    # Step 4: Create default departments
+    # Step 3: Create default departments
     create_default_departments()
     
-    # Step 5: Create default designations
+    # Step 4: Create default designations
     create_default_designations()
     
-    # Step 6: Setup leave types
+    # Step 5: Setup leave types
     setup_leave_types()
     
-    # Step 7: Setup attendance settings
+    # Step 6: Setup attendance settings
     setup_attendance_settings()
     
-    # Step 8: Setup payroll settings
+    # Step 7: Setup payroll settings
     setup_payroll_settings()
     
-    # Step 9: Create sample workflows
+    # Step 8: Create sample workflows
     create_hr_workflows()
     
-    # Step 10: Setup email templates
+    # Step 9: Setup email templates
     setup_email_templates()
     
-    # Step 11: Create dashboard
+    # Step 10: Create dashboard
     create_hr_dashboard()
     
     frappe.db.commit()
     frappe.msgprint(_("HR Suite installed successfully! 🎉"), alert=True, indicator="green")
-
-def install_required_apps():
-    """Check and install required apps"""
-    try:
-        # Check if ERPNext is installed
-        if "erpnext" not in frappe.get_installed_apps():
-            frappe.throw(_("Please install ERPNext first"))
-        
-        # Check if HRMS is installed (for ERPNext v14+)
-        if "hrms" not in frappe.get_installed_apps():
-            frappe.msgprint(_("Installing HRMS module..."), alert=True)
-            
-    except Exception as e:
-        frappe.log_error(f"Error installing apps: {str(e)}")
 
 def create_hr_roles():
     """Create custom HR roles"""
