@@ -1,0 +1,73 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Employee Portal{% endblock %}
+
+{% block page_content %}
+<div class="container mt-5">
+    <h1>Employee Self-Service Portal</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Profile</h5>
+                    <p class="card-text">View and update your profile information</p>
+                    <a href="/app/employee/{{ frappe.session.user }}" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Apply for Leave</h5>
+                    <p class="card-text">Submit leave applications</p>
+                    <a href="/app/leave-application/new" class="btn btn-primary">Apply Leave</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Attendance</h5>
+                    <p class="card-text">View your attendance records</p>
+                    <a href="/app/attendance" class="btn btn-primary">View Attendance</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Salary Slips</h5>
+                    <p class="card-text">Download your salary slips</p>
+                    <a href="/app/salary-slip" class="btn btn-primary">View Slips</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Leave Balance</h5>
+                    <p class="card-text">Check your leave balance</p>
+                    <a href="/app/leave-ledger-entry" class="btn btn-primary">View Balance</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Documents</h5>
+                    <p class="card-text">Access company documents</p>
+                    <a href="/app/file" class="btn btn-primary">View Documents</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
