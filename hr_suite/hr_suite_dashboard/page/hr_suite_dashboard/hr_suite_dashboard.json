@@ -1,0 +1,26 @@
+{
+ "content": null,
+ "creation": "2024-01-01 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HR Suite Dashboard",
+ "name": "hr-suite-dashboard",
+ "owner": "Administrator",
+ "page_name": "HR Suite Dashboard",
+ "roles": [
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "HR Manager Suite"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "HR Suite Dashboard"
+}
