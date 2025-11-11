@@ -3,6 +3,7 @@
 <div align="center">
   <img src="https://img.shields.io/badge/Frappe-Framework-blue" alt="Frappe">
   <img src="https://img.shields.io/badge/ERPNext-Compatible-green" alt="ERPNext">
+  <img src="https://img.shields.io/badge/Frappe_Cloud-Ready-orange" alt="Frappe Cloud">
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
   <img src="https://img.shields.io/badge/Version-1.0.0-red" alt="Version">
 </div>
@@ -12,6 +13,20 @@
 **HR Suite** is a comprehensive HR management solution that provides **one-click installation and configuration** for ERPNext's HR module. It automates the entire setup process, creating all necessary configurations, departments, designations, leave types, and workflows out of the box.
 
 Perfect for HR firms and companies looking to implement a complete HR management system without manual configuration!
+
+## 🌥️ Quick Start - Frappe Cloud
+
+**[📘 Complete Frappe Cloud Installation Guide →](FRAPPE_CLOUD_INSTALL.md)**
+
+### Installation Order on Frappe Cloud:
+
+1. **Add to Bench**: ERPNext → HRMS → HR Suite
+2. **Install to Site**: ERPNext → HRMS → HR Suite
+3. **Done!** ✅
+
+> **Note**: The installation order is important. Make sure ERPNext and HRMS are added to your bench before HR Suite.
+
+[View detailed Frappe Cloud guide](FRAPPE_CLOUD_INSTALL.md)
 
 ## ✨ Features
 
@@ -52,12 +67,29 @@ Perfect for HR firms and companies looking to implement a complete HR management
 
 ## 📦 Installation
 
-### Prerequisites
+### Method 1: Frappe Cloud (Recommended)
+
+**[📘 Complete Frappe Cloud Installation Guide →](FRAPPE_CLOUD_INSTALL.md)**
+
+Quick overview:
+```
+1. Add ERPNext to bench
+2. Add HRMS to bench
+3. Add HR Suite to bench
+4. Create/select site
+5. Install ERPNext to site
+6. Install HRMS to site
+7. Install HR Suite to site
+```
+
+### Method 2: Self-Hosted Installation
+
+#### Prerequisites
 - Frappe Framework (v14+)
 - ERPNext (v14+)
 - Python 3.10+
 
-### Method 1: Quick Installation (Recommended)
+#### Quick Installation
 
 ```bash
 # Navigate to your bench directory
@@ -73,7 +105,7 @@ bench --site your-site-name install-app hr_suite
 bench restart
 ```
 
-### Method 2: Development Installation
+#### Development Installation
 
 ```bash
 # Clone the repository
@@ -91,20 +123,14 @@ bench --site your-site-name install-app hr_suite
 bench restart
 ```
 
-### Method 3: One-Click Install Script
-
-Create a file `install_hr_suite.sh`:
+#### One-Click Install Script
 
 ```bash
 #!/bin/bash
 
-echo "=========================================="
-echo "HR Suite - One Click Installer"
-echo "=========================================="
+echo "Installing HR Suite..."
 
 read -p "Enter your site name: " SITE_NAME
-
-echo "Installing HR Suite on $SITE_NAME..."
 
 # Install ERPNext if not present
 if ! bench --site $SITE_NAME list-apps | grep -q "erpnext"; then
@@ -130,12 +156,6 @@ bench restart
 echo "✅ HR Suite installed successfully!"
 ```
 
-Make it executable and run:
-```bash
-chmod +x install_hr_suite.sh
-./install_hr_suite.sh
-```
-
 ## 🎯 What Gets Configured Automatically?
 
 Upon installation, HR Suite automatically configures:
@@ -151,20 +171,14 @@ Upon installation, HR Suite automatically configures:
 - Customer Support
 
 ### 2. Designations
-- CEO
-- Manager
-- Senior Developer
-- Developer
-- HR Manager
-- HR Executive
-- Sales Manager
-- Sales Executive
-- Marketing Manager
-- Marketing Executive
-- Accountant
-- Admin
+- CEO, Manager, Senior Developer, Developer
+- HR Manager, HR Executive
+- Sales Manager, Sales Executive
+- Marketing Manager, Marketing Executive
+- Accountant, Admin
 
 ### 3. Leave Types
+
 | Leave Type | Days | Carry Forward | Applicable After |
 |------------|------|---------------|------------------|
 | Annual Leave | 21 | Yes | 90 days |
@@ -180,6 +194,7 @@ Upon installation, HR Suite automatically configures:
 - Half-day threshold: 4 hours
 
 ### 5. Salary Components
+
 **Earnings:**
 - Basic Salary (Taxable)
 - Housing Allowance (Taxable)
@@ -210,9 +225,6 @@ Upon installation, HR Suite automatically configures:
    ```
 
 2. **Add New Employees**
-   ```
-   HR Suite > Employee > New
-   ```
    - User account created automatically
    - Welcome email sent automatically
    - Leaves allocated automatically
@@ -223,7 +235,7 @@ Upon installation, HR Suite automatically configures:
    - Check leave balances
 
 4. **Process Payroll**
-   - Create salary structures using pre-configured components
+   - Create salary structures
    - Generate salary slips
    - Email salary slips to employees
 
@@ -236,88 +248,33 @@ Upon installation, HR Suite automatically configures:
    - Download pay slips
 
 2. **Leave Application**
-   ```
-   HR Suite > Leave Application > New
-   ```
    - Select leave type
    - Choose dates
    - Submit for approval
 
-## 🔧 Configuration
-
-### Customizing Default Settings
-
-After installation, you can customize:
-
-1. **Modify Departments**
-   ```
-   HR > Department
-   ```
-
-2. **Adjust Leave Types**
-   ```
-   HR > Leave Type
-   ```
-
-3. **Update Salary Components**
-   ```
-   Payroll > Salary Component
-   ```
-
-4. **Configure Email Templates**
-   ```
-   Setup > Email > Email Template
-   ```
-
 ## 📅 Scheduled Tasks
 
-HR Suite runs the following automated tasks:
+HR Suite runs automated tasks:
 
 ### Daily Tasks
-- **Birthday Reminders**: Sends birthday wishes to employees
-- **Probation Alerts**: Notifies HR managers 7 days before probation ends
-- **Leave Balance**: Quarterly reminders to employees about unused leaves
-
-## 🎨 Customization
-
-### Adding Custom Fields
-
-```python
-# In your custom app
-from frappe import _
-
-def add_custom_fields():
-    custom_fields = {
-        "Employee": [
-            {
-                "fieldname": "custom_field",
-                "label": _("Custom Field"),
-                "fieldtype": "Data",
-                "insert_after": "field_name"
-            }
-        ]
-    }
-    create_custom_fields(custom_fields)
-```
-
-### Extending Functionality
-
-Create a custom app that extends HR Suite:
-
-```python
-# hooks.py
-app_name = "custom_hr"
-required_apps = ["hr_suite", "erpnext"]
-
-# Override HR Suite functions
-override_whitelisted_methods = {
-    "hr_suite.api.employee.after_employee_insert": "custom_hr.overrides.custom_employee_insert"
-}
-```
+- **Birthday Reminders**: Sends birthday wishes
+- **Probation Alerts**: Notifies HR 7 days before probation ends
+- **Leave Balance**: Quarterly reminders about unused leaves
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Frappe Cloud Issues
+
+**Issue: "Required app not found on bench"**
+
+Solution: Add apps in this order:
+1. ERPNext
+2. HRMS
+3. HR Suite
+
+[See detailed troubleshooting →](FRAPPE_CLOUD_INSTALL.md#-troubleshooting)
+
+### Self-Hosted Issues
 
 **Issue**: Installation fails with "ERPNext not found"
 ```bash
@@ -342,19 +299,15 @@ bench restart
 
 ## 📚 Documentation
 
-For more detailed documentation, visit:
-- [Frappe Documentation](https://frappeframework.com/docs)
-- [ERPNext HR Documentation](https://docs.erpnext.com/docs/user/manual/en/human-resources)
+- [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
+- [Frappe Cloud Installation](FRAPPE_CLOUD_INSTALL.md) - Cloud-specific guide
+- [Architecture Documentation](ARCHITECTURE.md) - Technical details
+- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute
+- [Changelog](CHANGELOG.md) - Version history
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📝 License
 
@@ -364,13 +317,14 @@ This project is licensed under the MIT License - see the [LICENSE](license.txt) 
 
 - Built on [Frappe Framework](https://frappeframework.com)
 - Extends [ERPNext](https://erpnext.com)
-- Inspired by the needs of modern HR departments
+- Optimized for [Frappe Cloud](https://frappecloud.com)
 
 ## 📧 Support
 
+- **Frappe Cloud**: [Installation Guide](FRAPPE_CLOUD_INSTALL.md)
 - **Issues**: [GitHub Issues](https://github.com/macrobian88/hr_suite/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/macrobian88/hr_suite/discussions)
-- **Email**: support@yourcompany.com
+- **Forum**: [Frappe Forum](https://discuss.frappe.io)
 
 ## 🚀 Roadmap
 
@@ -383,7 +337,7 @@ This project is licensed under the MIT License - see the [LICENSE](license.txt) 
 
 ## ⭐ Star Us!
 
-If you find HR Suite helpful, please give us a star on GitHub! It helps others discover the project.
+If you find HR Suite helpful, please give us a star on GitHub!
 
 ---
 
