@@ -9,7 +9,9 @@ app_license = "MIT"
 app_version = "1.0.0"
 
 # Required apps - ERPNext includes HR module
-required_apps = ["erpnext"]
+# Note: ERPNext and HRMS should be installed on your site for HR Suite to work properly
+# We don't enforce this at bench level to allow flexible installation order on Frappe Cloud
+required_apps = []
 
 # Fixtures - Data that will be installed automatically
 fixtures = [
