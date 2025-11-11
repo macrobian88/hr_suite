@@ -4,343 +4,384 @@
   <img src="https://img.shields.io/badge/Frappe-Framework-blue" alt="Frappe">
   <img src="https://img.shields.io/badge/ERPNext-Compatible-green" alt="ERPNext">
   <img src="https://img.shields.io/badge/Frappe_Cloud-Ready-orange" alt="Frappe Cloud">
+  <img src="https://img.shields.io/badge/Auto_Install-Yes-brightgreen" alt="Auto Install">
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
   <img src="https://img.shields.io/badge/Version-1.0.0-red" alt="Version">
 </div>
 
 ## 🎯 Overview
 
-**HR Suite** is a comprehensive HR management solution that provides **one-click installation and configuration** for ERPNext's HR module. It automates the entire setup process, creating all necessary configurations, departments, designations, leave types, and workflows out of the box.
+**HR Suite** is a comprehensive HR management solution with **intelligent dependency management**. It automatically detects and installs ERPNext and HRMS if they're not already present, making it truly one-click!
 
-Perfect for HR firms and companies looking to implement a complete HR management system without manual configuration!
+### ⚡ Smart Features
 
-## 🌥️ Quick Start - Frappe Cloud
+- 🧠 **Intelligent Dependency Detection**: Automatically checks if ERPNext and HRMS are installed
+- 🔄 **Auto-Installation** (Self-Hosted): Automatically installs missing dependencies
+- 💬 **Helpful Guidance** (Frappe Cloud): Shows exactly what to do if dependencies are missing
+- ⚙️ **Zero Configuration**: Everything is pre-configured out of the box
+- 🚀 **One-Click Setup**: Install and start using immediately
 
-**[📘 Complete Frappe Cloud Installation Guide →](FRAPPE_CLOUD_INSTALL.md)**
+---
 
-### Installation Order on Frappe Cloud:
+## 🌥️ Installation - Choose Your Platform
 
-1. **Add to Bench**: ERPNext → HRMS → HR Suite
-2. **Install to Site**: ERPNext → HRMS → HR Suite
-3. **Done!** ✅
+### 🎯 Frappe Cloud (Recommended for Beginners)
 
-> **Note**: The installation order is important. Make sure ERPNext and HRMS are added to your bench before HR Suite.
+**Just add HR Suite - it will guide you through the rest!**
 
-[View detailed Frappe Cloud guide](FRAPPE_CLOUD_INSTALL.md)
-
-## ✨ Features
-
-### 🚀 One-Click Installation
-- Automated installation and configuration
-- Pre-configured HR settings
-- Ready-to-use out of the box
-
-### 👥 Employee Management
-- Auto-create user accounts for new employees
-- Automated welcome email notifications
-- Automatic leave allocation on joining
-- Employee self-service portal
-
-### 🏢 Pre-Configured Setup
-- **8 Default Departments**: HR, Operations, Finance, Sales, Marketing, IT, Administration, Customer Support
-- **12 Default Designations**: CEO, Manager, Developer, HR roles, and more
-- **6 Leave Types**: Annual, Sick, Casual, LWP, Maternity, Paternity
-- **Shift Configuration**: Default 9 AM - 6 PM shift
-- **Salary Components**: Basic, HRA, Transport, Medical allowances
-
-### 📧 Automated Notifications
-- Birthday reminders
-- Probation ending alerts
-- Leave balance notifications
-- Welcome emails for new employees
-
-### 🎨 Custom Roles
-- HR Manager Suite
-- HR User Suite
-- Employee Self Service
-
-### 📊 Dashboard & Reports
-- HR Suite Dashboard
-- Real-time HR statistics
-- Leave tracking
-- Attendance monitoring
-
-## 📦 Installation
-
-### Method 1: Frappe Cloud (Recommended)
-
-**[📘 Complete Frappe Cloud Installation Guide →](FRAPPE_CLOUD_INSTALL.md)**
-
-Quick overview:
 ```
-1. Add ERPNext to bench
-2. Add HRMS to bench
-3. Add HR Suite to bench
-4. Create/select site
-5. Install ERPNext to site
-6. Install HRMS to site
-7. Install HR Suite to site
+1. Go to: Benches → [Your Bench] → Apps → Add App
+2. Repository: https://github.com/macrobian88/hr_suite
+3. Branch: main
+4. Install to your site
+5. Follow any prompts if dependencies are missing
 ```
 
-### Method 2: Self-Hosted Installation
+**[📘 Complete Frappe Cloud Guide →](FRAPPE_CLOUD_INSTALL.md)**
 
-#### Prerequisites
-- Frappe Framework (v14+)
-- ERPNext (v14+)
-- Python 3.10+
+### 💻 Self-Hosted (Fully Automatic)
 
-#### Quick Installation
+**One command - ERPNext & HRMS install automatically if needed!**
 
 ```bash
-# Navigate to your bench directory
 cd frappe-bench
-
-# Get the HR Suite app
 bench get-app https://github.com/macrobian88/hr_suite
-
-# Install to your site
-bench --site your-site-name install-app hr_suite
-
-# Restart bench
+bench --site your-site.local install-app hr_suite
 bench restart
 ```
 
-#### Development Installation
+**That's it!** HR Suite will:
+- ✅ Check if ERPNext is installed (auto-install if missing)
+- ✅ Check if HRMS is installed (auto-install if missing)
+- ✅ Install HR Suite
+- ✅ Configure everything automatically
+
+---
+
+## ✨ What Makes HR Suite Special
+
+### 🧠 Smart Dependency Management
+
+| Platform | Behavior |
+|----------|----------|
+| **Frappe Cloud** | Shows helpful error with exact steps if ERPNext/HRMS missing |
+| **Self-Hosted** | **Automatically installs** ERPNext and HRMS if missing |
+
+### 🎁 Pre-Configured Features
+
+Upon installation, HR Suite automatically creates:
+
+- ✅ **8 Departments**: HR, Operations, Finance, Sales, Marketing, IT, Administration, Customer Support
+- ✅ **12 Designations**: CEO, Manager, Developer, HR roles, and more
+- ✅ **6 Leave Types**: Annual (21 days), Sick (12 days), Casual (7 days), LWP, Maternity (90 days), Paternity (5 days)
+- ✅ **1 Shift Type**: General Shift (9 AM - 6 PM)
+- ✅ **6 Salary Components**: Basic, HRA, Transport, Medical, Income Tax, Professional Tax
+- ✅ **3 Custom Roles**: HR Manager Suite, HR User Suite, Employee Self Service
+- ✅ **Email Templates**: Welcome emails, Leave approval notifications
+- ✅ **HR Dashboard**: Real-time statistics and quick actions
+
+### 🤖 Automated Workflows
+
+- **Employee Onboarding**: Auto-create user accounts, send welcome emails, allocate leaves
+- **Leave Management**: Automated approval workflows and notifications
+- **Reminders**: Birthday wishes, probation alerts, leave balance updates
+- **Self-Service**: Employee portal for leaves, attendance, payslips
+
+---
+
+## 📦 Detailed Installation
+
+### Option 1: Frappe Cloud
+
+#### Step 1: Add HR Suite to Bench
+```
+Dashboard → Benches → [Your Bench] → Apps → Add App
+Repository: https://github.com/macrobian88/hr_suite
+Branch: main
+```
+
+#### Step 2: Install to Site
+```
+Dashboard → Sites → [Your Site] → Apps → Install HR Suite
+```
+
+**If you see "Missing Required Apps" error:**
+- Don't worry! This is intentional
+- The error message tells you exactly what to do
+- Add ERPNext and HRMS to your bench
+- Install them to your site
+- Then install HR Suite
+
+**[📘 Full Frappe Cloud Guide with Screenshots →](FRAPPE_CLOUD_INSTALL.md)**
+
+---
+
+### Option 2: Self-Hosted (Quick Install)
 
 ```bash
-# Clone the repository
-cd frappe-bench/apps
-git clone https://github.com/macrobian88/hr_suite
-
-# Install dependencies
-cd hr_suite
-pip install -e .
-
-# Install to site
-bench --site your-site-name install-app hr_suite
-
-# Restart
+# Single command installation
+cd frappe-bench
+bench get-app https://github.com/macrobian88/hr_suite
+bench --site your-site.local install-app hr_suite
 bench restart
 ```
 
-#### One-Click Install Script
+**What happens automatically:**
+1. Checks for ERPNext → Installs if missing
+2. Checks for HRMS → Installs if missing
+3. Installs HR Suite
+4. Configures all settings
+5. Creates master data
+
+---
+
+### Option 3: Manual Installation (Advanced)
+
+If you prefer full control:
 
 ```bash
-#!/bin/bash
-
-echo "Installing HR Suite..."
-
-read -p "Enter your site name: " SITE_NAME
-
-# Install ERPNext if not present
-if ! bench --site $SITE_NAME list-apps | grep -q "erpnext"; then
-    echo "Installing ERPNext..."
-    bench get-app erpnext --branch version-14
-    bench --site $SITE_NAME install-app erpnext
-fi
-
-# Install HRMS
-if ! bench --site $SITE_NAME list-apps | grep -q "hrms"; then
-    echo "Installing HRMS..."
-    bench get-app hrms --branch version-14
-    bench --site $SITE_NAME install-app hrms
-fi
+# Install dependencies first
+bench get-app erpnext --branch version-15
+bench get-app hrms --branch version-15
+bench --site your-site.local install-app erpnext
+bench --site your-site.local install-app hrms
 
 # Install HR Suite
 bench get-app https://github.com/macrobian88/hr_suite
-bench --site $SITE_NAME install-app hr_suite
-bench --site $SITE_NAME migrate
-bench build --app hr_suite
+bench --site your-site.local install-app hr_suite
 bench restart
-
-echo "✅ HR Suite installed successfully!"
 ```
+
+---
 
 ## 🎯 What Gets Configured Automatically?
 
-Upon installation, HR Suite automatically configures:
+### 1. Master Data
 
-### 1. Departments
-- Human Resources
-- Operations
-- Finance
-- Sales
-- Marketing
-- IT
-- Administration
-- Customer Support
+**Departments (8)**
+- Human Resources, Operations, Finance, Sales
+- Marketing, IT, Administration, Customer Support
 
-### 2. Designations
+**Designations (12)**
 - CEO, Manager, Senior Developer, Developer
-- HR Manager, HR Executive
-- Sales Manager, Sales Executive
-- Marketing Manager, Marketing Executive
-- Accountant, Admin
+- HR Manager, HR Executive, Sales Manager, Sales Executive
+- Marketing Manager, Marketing Executive, Accountant, Admin
 
-### 3. Leave Types
+### 2. Leave Management
 
 | Leave Type | Days | Carry Forward | Applicable After |
 |------------|------|---------------|------------------|
-| Annual Leave | 21 | Yes | 90 days |
-| Sick Leave | 12 | No | Immediate |
-| Casual Leave | 7 | No | Immediate |
-| Leave Without Pay | Unlimited | No | Immediate |
-| Maternity Leave | 90 | No | 180 days |
-| Paternity Leave | 5 | No | 180 days |
+| Annual Leave | 21 | ✅ Yes | 90 days |
+| Sick Leave | 12 | ❌ No | Immediate |
+| Casual Leave | 7 | ❌ No | Immediate |
+| Leave Without Pay | ∞ | ❌ No | Immediate |
+| Maternity Leave | 90 | ❌ No | 180 days |
+| Paternity Leave | 5 | ❌ No | 180 days |
 
-### 4. Shift Types
-- **General Shift**: 9:00 AM - 6:00 PM
+### 3. Attendance & Payroll
+
+**Shift Type**: General Shift (9:00 AM - 6:00 PM)
 - Auto-attendance enabled
 - Half-day threshold: 4 hours
+- Working days: Monday to Friday
 
-### 5. Salary Components
+**Salary Components**:
+- **Earnings**: Basic Salary, HRA, Transport Allowance, Medical Allowance
+- **Deductions**: Income Tax, Professional Tax
 
-**Earnings:**
-- Basic Salary (Taxable)
-- Housing Allowance (Taxable)
-- Transport Allowance (Taxable)
-- Medical Allowance (Non-Taxable)
+### 4. Roles & Permissions
 
-**Deductions:**
-- Income Tax
-- Professional Tax
+- **HR Manager Suite**: Full access to all HR functions
+- **HR User Suite**: Limited HR operations
+- **Employee Self Service**: Personal data access only
 
-### 6. Email Templates
-- Welcome Email
-- Leave Approval Notification
+---
 
-### 7. HR Settings
-- Leave approver mandatory
-- Email notifications enabled
-- Payroll based on attendance
-- Birthday reminders enabled
-
-## 💼 Usage
+## 💼 How to Use
 
 ### For HR Managers
 
-1. **Access HR Suite Dashboard**
-   ```
-   Desk > HR Suite > Dashboard
-   ```
+**1. Access Dashboard**
+```
+Desk → HR Suite → Dashboard
+```
+View real-time statistics:
+- Total active employees
+- Employees on leave today
+- Pending leave applications
+- New joinings this month
 
-2. **Add New Employees**
-   - User account created automatically
-   - Welcome email sent automatically
-   - Leaves allocated automatically
+**2. Add New Employee**
+```
+HR Suite → Quick Actions → Add New Employee
+```
+What happens automatically:
+- ✅ User account created
+- ✅ Welcome email sent
+- ✅ Leaves allocated
+- ✅ Self-service role assigned
 
-3. **Manage Leaves**
-   - Approve/reject leave applications
-   - View leave calendar
-   - Check leave balances
+**3. Manage Leaves**
+- Approve/reject applications
+- View leave calendar
+- Check team leave balances
 
-4. **Process Payroll**
-   - Create salary structures
-   - Generate salary slips
-   - Email salary slips to employees
+**4. Process Payroll**
+- Create salary structures
+- Generate salary slips
+- Email slips to employees
 
 ### For Employees
 
-1. **Self-Service Portal**
-   - Apply for leaves
-   - View leave balance
-   - Check attendance
-   - Download pay slips
+**1. Self-Service Portal**
+```
+https://your-site.local/hr-portal
+```
 
-2. **Leave Application**
-   - Select leave type
-   - Choose dates
-   - Submit for approval
+**2. Apply for Leave**
+```
+HR → Leave Application → New
+```
 
-## 📅 Scheduled Tasks
+**3. View Salary Slips**
+```
+Payroll → Salary Slip
+```
 
-HR Suite runs automated tasks:
+**4. Check Leave Balance**
+```
+HR → Leave Ledger Entry
+```
 
-### Daily Tasks
-- **Birthday Reminders**: Sends birthday wishes
-- **Probation Alerts**: Notifies HR 7 days before probation ends
-- **Leave Balance**: Quarterly reminders about unused leaves
+---
+
+## 📅 Automated Tasks
+
+HR Suite runs background tasks automatically:
+
+### Daily (9:00 AM)
+- 🎂 **Birthday Reminders**: Sends wishes to employees
+- ⏰ **Probation Alerts**: Notifies HR 7 days before probation ends
+- 📊 **Leave Balance**: Quarterly reminders about unused leaves
+
+### Real-time
+- 📧 **Welcome Emails**: Sent immediately when employee is created
+- 📩 **Leave Notifications**: Instant notifications on approval/rejection
+
+---
 
 ## 🐛 Troubleshooting
 
-### Frappe Cloud Issues
+### Frappe Cloud
 
-**Issue: "Required app not found on bench"**
-
-Solution: Add apps in this order:
-1. ERPNext
-2. HRMS
-3. HR Suite
+**Q: I see "Missing Required Apps" error**  
+**A:** This is intentional! Follow the instructions in the error message:
+1. Add ERPNext to your bench
+2. Add HRMS to your bench
+3. Install both to your site
+4. Then install HR Suite
 
 [See detailed troubleshooting →](FRAPPE_CLOUD_INSTALL.md#-troubleshooting)
 
-### Self-Hosted Issues
+### Self-Hosted
 
-**Issue**: Installation fails with "ERPNext not found"
+**Q: Auto-installation failed**  
+**A:** Install manually:
 ```bash
-# Solution: Install ERPNext first
-bench get-app erpnext --branch version-14
+bench get-app erpnext --branch version-15
+bench get-app hrms --branch version-15
 bench --site your-site install-app erpnext
+bench --site your-site install-app hrms
+bench --site your-site install-app hr_suite
 ```
 
-**Issue**: Email templates not working
+**Q: Email templates not working**  
+**A:** Configure email settings:
 ```bash
-# Solution: Check email settings
 bench --site your-site set-config mail_server "smtp.gmail.com"
 bench --site your-site set-config mail_port 587
+bench --site your-site set-config mail_login "your@email.com"
+bench --site your-site set-config mail_password "your-password"
 ```
 
-**Issue**: Scheduled tasks not running
+**Q: Scheduled tasks not running**  
+**A:** Enable scheduler:
 ```bash
-# Solution: Enable scheduler
 bench --site your-site enable-scheduler
 bench restart
 ```
 
+---
+
 ## 📚 Documentation
 
-- [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
-- [Frappe Cloud Installation](FRAPPE_CLOUD_INSTALL.md) - Cloud-specific guide
-- [Architecture Documentation](ARCHITECTURE.md) - Technical details
-- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute
-- [Changelog](CHANGELOG.md) - Version history
+- **[Quick Start Guide](QUICKSTART.md)** - Get started in 5 minutes
+- **[Frappe Cloud Installation](FRAPPE_CLOUD_INSTALL.md)** - Cloud-specific guide
+- **[Architecture Documentation](ARCHITECTURE.md)** - Technical details
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute
+- **[Changelog](CHANGELOG.md)** - Version history
+
+---
+
+## 🚀 Roadmap
+
+- [ ] Multi-language support
+- [ ] Advanced analytics dashboard with charts
+- [ ] Mobile app integration
+- [ ] AI-powered leave predictions
+- [ ] Performance management module
+- [ ] Training and development tracking
+- [ ] Recruitment and onboarding module
+- [ ] Employee surveys and feedback
+
+---
 
 ## 🤝 Contributing
 
 Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+### How to Contribute
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](license.txt) file for details.
 
+---
+
 ## 🙏 Acknowledgments
 
 - Built on [Frappe Framework](https://frappeframework.com)
-- Extends [ERPNext](https://erpnext.com)
+- Extends [ERPNext](https://erpnext.com) and [HRMS](https://github.com/frappe/hrms)
 - Optimized for [Frappe Cloud](https://frappecloud.com)
+- Inspired by the needs of modern HR departments
+
+---
 
 ## 📧 Support
 
-- **Frappe Cloud**: [Installation Guide](FRAPPE_CLOUD_INSTALL.md)
 - **Issues**: [GitHub Issues](https://github.com/macrobian88/hr_suite/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/macrobian88/hr_suite/discussions)
 - **Forum**: [Frappe Forum](https://discuss.frappe.io)
+- **Frappe Cloud**: [Installation Guide](FRAPPE_CLOUD_INSTALL.md)
 
-## 🚀 Roadmap
-
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
-- [ ] Mobile app integration
-- [ ] AI-powered leave predictions
-- [ ] Performance management module
-- [ ] Training and development tracking
+---
 
 ## ⭐ Star Us!
 
-If you find HR Suite helpful, please give us a star on GitHub!
+If you find HR Suite helpful, please give us a star on GitHub! It helps others discover the project.
+
+[![GitHub stars](https://img.shields.io/github/stars/macrobian88/hr_suite?style=social)](https://github.com/macrobian88/hr_suite/stargazers)
 
 ---
 
 <div align="center">
-  Made with ❤️ for the HR Community
+  <h3>Made with ❤️ for the HR Community</h3>
+  <p>Smart • Automated • Easy to Use</p>
 </div>
