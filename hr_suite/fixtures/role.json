@@ -1,0 +1,26 @@
+[
+    {
+        "doctype": "Role",
+        "name": "HR Manager Suite",
+        "role_name": "HR Manager Suite",
+        "desk_access": 1,
+        "is_custom": 1,
+        "disabled": 0
+    },
+    {
+        "doctype": "Role",
+        "name": "HR User Suite",
+        "role_name": "HR User Suite",
+        "desk_access": 1,
+        "is_custom": 1,
+        "disabled": 0
+    },
+    {
+        "doctype": "Role",
+        "name": "Employee Self Service",
+        "role_name": "Employee Self Service",
+        "desk_access": 1,
+        "is_custom": 1,
+        "disabled": 0
+    }
+]
